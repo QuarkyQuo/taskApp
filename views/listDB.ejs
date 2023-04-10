@@ -1,0 +1,52 @@
+<%-include('header')-%>
+  <!-- page title -->
+  <div class="navbar">
+    <a href="/" alt="HOME">Home</a>
+    <a href="/work" alt="Workspace">Workspace</a>
+  </div>
+
+  <div>
+    <h1 class='title' style="text-align:center;">
+      <%= pageRoot%>
+    </h1>
+  </div>
+
+  <!-- container-->
+  <div class=" box ">
+    <!-- date  -->
+    <div class=" date">
+      <%= kindOfDay%>
+    </div>
+    <% for(let i=0;i<tasks.length;i++){ %>
+      <!-- task items -->
+      <div class="task-box">
+        <form class="items" action="/delete" method="post">
+          <input type='checkbox' onChange="this.form.submit()" name="checkbox" value='<%=tasks[i]._id%>'>
+          <p>
+            <%= tasks[i].task %>
+          </p>
+        </form>
+        <div class="time">
+          <%const dateVar = new Date(tasks[i].time.Due)  %>
+          <%const monthName=['January','February','March','April','May','June','Julay','August','September','October','November','December']%>
+          <%=dateVar.getDate() +' '+monthName[dateVar.getMonth()]+' '+dateVar.getFullYear()%>
+        </div>
+      </div>
+      <% } %>
+        <div class="add-items">
+          <form action="/" method="post">
+            <input class="input-grid-col-1" type="text" name="task" placeholder="New item" autocomplete="off">
+            <input class="input-grid-col-2" type='text' placeholder="Due date" onfocus="(this.type = 'date')" name="due"
+              autocomplete="off">
+            <button class='btn' type="submit" name="root" value="<%= pageRoot%>">+</button>
+          </form>
+        </div>
+  </div>
+<div class="new-workspace-box">
+<form action="/workspace" method="post">
+  <input type="text" name="newWorkspace" placeholder="New workspace" autocomplete="off">
+  <button class='btn'>+</button>
+</form>
+</div>
+
+  <%-include('footer')-%>
