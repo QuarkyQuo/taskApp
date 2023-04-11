@@ -16,7 +16,7 @@ mongoose.set('strictQuery',false)
 
 async function connect() {
 
-  await mongoose.connect('mongodb+srv://QuarkyQuo:ksk101202@cluster0.zqt7i2n.mongodb.net/toDoListDB?retryWrites=true&w=majority',{useNewUrlParser:true,useUnifiedTopology:true})
+  await mongoose.connect('mongodb://0.0.0.0:27017',{useNewUrlParser:true,useUnifiedTopology:true})
 
     const taskSchema =await new mongoose.Schema({
         task:{
